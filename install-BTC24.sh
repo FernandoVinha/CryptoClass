@@ -26,6 +26,7 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ] || [ "$(expr substr $
     arch="win64"
 else
     echo "Unsupported operating system."
+    echo "install a better one, preferably a linux."
     exit 1
 fi
 
@@ -46,6 +47,7 @@ elif [ "$os" == "win" ]; then
     fi
 else
     echo "Unsupported architecture and operating system combination."
+    echo "install a better one, preferably a linux."
     exit 1
 fi
 
@@ -71,3 +73,24 @@ gpg --verify SHA256SUMS.asc SHA256SUMS
 
 # Verify the downloaded file's hash value
 shasum -c --ignore-missing SHA256SUMS 2>&1 | grep "${file}"
+
+# Add the extracted Bitcoin Core binary directory to the PATH
+export PATH=$PATH:$(pwd)/bitcoin-24.0.1/bin
+
+# Start the Bitcoin Core daemon (bitcoind) in the background
+bitcoind -daemon
+
+# Retrieve and display blockchain information using the bitcoin-cli command
+bitcoin-cli getblockchaininfo
+# Wait for 5 seconds to allow the Bitcoin Core daemon to start up before running the bitcoin-cli command
+sleep 5
+# Retrieve and display blockchain information using the bitcoin-cli command
+bitcoin-cli getblockchaininfo
+# Wait for 5 seconds to allow the Bitcoin Core daemon to start up before running the bitcoin-cli command
+sleep 5
+# Retrieve and display blockchain information using the bitcoin-cli command
+bitcoin-cli getblockchaininfo
+# Wait for 5 seconds to allow the Bitcoin Core daemon to start up before running the bitcoin-cli command
+sleep 5
+# Retrieve and display blockchain information using the bitcoin-cli command
+bitcoin-cli getblockchaininfo
