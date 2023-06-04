@@ -94,3 +94,19 @@ bitcoin-cli getblockchaininfo
 sleep 5
 # Retrieve and display blockchain information using the bitcoin-cli command
 bitcoin-cli getblockchaininfo
+
+# Instale as dependências
+sudo apt-get install -y \
+  autoconf automake build-essential git libtool libgmp-dev \
+  libsqlite3-dev python3 python3-mako net-tools zlib1g-dev libsodium-dev \
+  gettext
+
+# Clone o repositório c-lightning
+cd ~
+git clone https://github.com/ElementsProject/lightning.git
+cd lightning
+
+# Compile e instale o c-lightning
+./configure
+make
+sudo make install
